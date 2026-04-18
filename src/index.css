@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Inter:wght@400;500;600&display=swap&subset=latin,latin-ext');
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", sans-serif;
+  
+  --color-brand-pink: #ff00ff;
+  --color-brand-purple: #a855f7;
+  --color-brand-blue: #00d2ff;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-gray-50 text-gray-900 antialiased;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply font-display font-extrabold tracking-tight;
+  }
+}
+
+.glass-morphism {
+  @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+}
+
+.vibrant-gradient {
+  background: linear-gradient(135deg, #a855f7 0%, #ff01ff 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #c084fc 0%, #ff66ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
