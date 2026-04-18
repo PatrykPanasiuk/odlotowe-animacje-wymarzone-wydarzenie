@@ -3,9 +3,9 @@ import type { ReactNode } from 'react';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Odlotowe Animacje — Twoje wymarzone wydarzenie!',
+  title: 'Odlotowe Animacje',
   description:
-    'Profesjonalne animacje dla dzieci na urodziny, wesela, komunie i pikniki. Działamy w Białej Podlaskiej i okolicach. Tworzymy odlotowe wspomnienia!',
+    'Tworzymy odlotowe wspomnienia, które zostają na długo! Animacje dla dzieci, imprezy rodzinne, szkolne i firmowe. Mobilnie — Biała Podlaska i okolice.',
 };
 
 export default function RootLayout({
