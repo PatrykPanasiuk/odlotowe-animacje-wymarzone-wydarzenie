@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -23,7 +25,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
-import { cn } from './lib/utils';
+import { cn } from '@/lib/utils';
 
 // --- Data ---
 const SERVICES = [
@@ -224,7 +226,7 @@ const FloatingBubbles = React.memo(() => {
   );
 });
 
-export default function App() {
+export default function HomePage() {
 
   return (
     <div className="min-h-screen bubble-bg overflow-x-hidden">
