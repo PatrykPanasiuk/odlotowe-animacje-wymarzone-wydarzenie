@@ -5,7 +5,7 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Odlotowe Animacje',
   description:
-    'Tworzymy odlotowe wspomnienia, które zostają na długo! Animacje dla dzieci, imprezy rodzinne, szkolne i firmowe. Mobilnie — Biała Podlaska i okolice.',
+    'Tworzymy odlotowe wspomnienia, które zostają na długo! Animacje dla dzieci, imprezy rodzinne, szkolne i firmowe. Działamy mobilnie, lokalnie i nie tylko. www.odlotowe-animacje.pl',
 };
 
 export default function RootLayout({

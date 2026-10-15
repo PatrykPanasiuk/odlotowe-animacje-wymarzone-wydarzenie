@@ -21,7 +21,6 @@ import {
   Palette,
   LayoutGrid,
   Tent,
-  Trash2,
   CalendarDays,
   Menu,
   X,
@@ -31,7 +30,10 @@ import {
   Popcorn,
   Castle,
   Droplets,
-  Activity
+  Activity,
+  Shield,
+  Smile,
+  Zap
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { EventDateField } from '@/components/event-date-field';
@@ -44,12 +46,31 @@ const SERVICES = [
 ];
 
 const ATTRACTIONS = [
-  { name: "Malowanie twarzy", icon: Palette, color: "text-pink-500", desc: "Zmieniamy dzieci w ulubione postacie!", image: "https://picsum.photos/seed/facepainting/400/300" },
-  { name: "Brokatowe tatuaże", icon: Sparkles, color: "text-purple-500", desc: "Błyszczące ozdoby dla każdego.", image: "https://picsum.photos/seed/tattoos/400/300" },
-  { name: "Skręcanie balonów", icon: Tent, color: "text-blue-500", desc: "Miecze, psy, kwiaty i inne cuda.", image: "https://picsum.photos/seed/balloons/400/300" },
-  { name: "Gry i zabawy drużynowe", icon: LayoutGrid, color: "text-yellow-500", desc: "Tory przeszkód, przeciąganie liny, skoki w workach, rzucanie do celu, tunele animacyjne, skoki na piłkach i wiele innych.", image: "https://picsum.photos/seed/games/400/300" },
-  { name: "Piniata", icon: PartyPopper, color: "text-orange-500", desc: "Słodka niespodzianka na koniec.", image: "https://picsum.photos/seed/pinata/400/300" },
-  { name: "Chusta animacyjna", icon: Users, color: "text-green-500", desc: "Integracja przez wspólną zabawę.", image: "https://picsum.photos/seed/parachute/400/300" },
+  { name: "Dmuchana zjeżdżalnia", icon: Castle, color: "text-red-500", desc: "Hit każdej imprezy!", image: "/images/attractions/bouncy-castle.jpg" },
+  { name: "Wata cukrowa", icon: Cloud, color: "text-pink-400", desc: "Słodka przyjemność, której nie da się odmówić.", image: "/images/attractions/cotton-candy.jpg" },
+  { name: "Popcorn", icon: Popcorn, color: "text-yellow-600", desc: "Obowiązkowa przekąska, która znika w mgnieniu oka.", image: "/images/attractions/popcorn.jpg" },
+  { name: "Fotobudka", icon: Aperture, color: "text-purple-400", desc: "Wspomnienia, które zostają na dłużej.", image: "/images/attractions/photobooth.jpg" },
+  { name: "Malowanie twarzy", icon: Palette, color: "text-pink-500", desc: "Magia na buzi, radość w sercu.", image: "/images/attractions/face-painting.jpg" },
+  { name: "Brokatowe tatuaże", icon: Sparkles, color: "text-purple-500", desc: "Błysk, który przyciąga spojrzenia.", image: "/images/attractions/glitter-tattoos.jpg" },
+  { name: "Pokazy baniek XXL", icon: Droplets, color: "text-cyan-500", desc: "Magiczne widowisko, które zachwyca każdego.", image: "/images/attractions/bubble-show.jpg" },
+  { name: "Skręcanie balonów", icon: Tent, color: "text-blue-500", desc: "Tworzymy balonowe cuda według pomysłów dzieci.", image: "/images/attractions/balloon-twisting.jpg" },
+  { name: "Piniata", icon: PartyPopper, color: "text-orange-500", desc: "Niespodzianka pełna emocji i słodkich skarbów", image: "/images/attractions/pinata.jpg" },
+  { name: "Gry i zabawy drużynowe", icon: LayoutGrid, color: "text-yellow-500", desc: "Tory przeszkód, przeciąganie liny, skoki w workach, rzucanie do celu, tunele animacyjne, skoki na piłkach i wiele innych.", image: "/images/attractions/team-games.jpg" },
+  { name: "Chusta animacyjna", icon: Users, color: "text-green-500", desc: "Kolorowa zabawa, która łączy wszystkie dzieci.", image: "/images/attractions/parachute-play.jpg" },
+  { name: "Taniec z maskotką", icon: Smile, color: "text-rose-500", desc: "Ruch i muzyka, która porywa każde dziecko.", image: "/images/attractions/mascot-dance.jpg" },
+  { name: "Trampolina", icon: Activity, color: "text-emerald-500", desc: "Czysta frajda, w każdym skoku.", image: "/images/attractions/trampoline.jpg" },
+];
+
+const BASIC_ATTRACTIONS = [
+  "Zabawy ruchowe i integracyjne",
+  "Przeciąganie liny",
+  "Skręcanie balonów",
+  "Taniec z animatorem do muzyki",
+  "Pokazy baniek XXL",
+  "Zabawy z chustą animacyjną",
+  "Tory przeszkód",
+  "Konkurencje z nagrodami",
+  "Wytwornica dymu i baniek mydlanych",
 ];
 
 const ADDITIONAL_ATTRACTIONS = [
@@ -300,7 +321,7 @@ export default function HomePage() {
             <div className="relative z-10 w-full aspect-square rounded-[3rem] overflow-hidden shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
               {/* Feature Image */}
               <img 
-                src="https://picsum.photos/seed/happykids/800/800" 
+                src="/images/attractions/hero-kids-party.jpg" 
                 alt="Szczęśliwe dzieci" 
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
@@ -423,12 +444,12 @@ export default function HomePage() {
           subtitle="Możesz wybrać dowolną atrakcję lub stworzyć pakiet dopasowany do swojego wydarzenia. Dzięki naszej obecności dzieci mają zapewnione atrakcje, a dorośli mogą w pełni korzystać z wydarzenia."
         />
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+        <div className="flex flex-wrap justify-center gap-8 mb-20">
           {ATTRACTIONS.map((attr, i) => (
             <motion.div
               key={i}
               whileHover={{ y: -10 }}
-              className="group bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100"
+              className="group bg-white rounded-[2.5rem] overflow-hidden shadow-lg border border-gray-100 w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.1rem)]"
             >
               <div className="h-48 overflow-hidden relative">
                 <img src={attr.image} alt={attr.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" referrerPolicy="no-referrer" />
@@ -444,9 +465,9 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* Additional Attractions */}
+        {/* Atrakcje dla najmłodszych */}
         <div className="bg-brand-purple/5 rounded-[3rem] p-8 md:p-16 border border-brand-purple/10">
-          <h3 className="text-3xl font-display text-center mb-12">Atrakcje dodatkowe & dla najmłodszych</h3>
+          <h3 className="text-3xl font-display text-center mb-12">Atrakcje dla najmłodszych</h3>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {ADDITIONAL_ATTRACTIONS.map((attr, i) => (
               <div key={i} className="flex items-start space-x-4 bg-white p-6 rounded-2xl shadow-sm border border-brand-purple/5 hover:border-brand-purple/20 transition-all">
@@ -463,7 +484,7 @@ export default function HomePage() {
             <div className="sm:col-span-2 lg:col-span-3 mt-8 p-10 vibrant-gradient rounded-[2rem] text-white">
               <div className="flex flex-col md:flex-row items-center justify-between gap-8">
                 <div className="max-w-xl">
-                  <h4 className="text-3xl font-display mb-2">Dla najmłodszych (0–3 lata)</h4>
+                  <h4 className="text-3xl font-display mb-2">Dla najmłodszych</h4>
                   <p className="text-white/85 text-base font-semibold mb-6">Nawet najmłodsi znajdą coś dla siebie!</p>
                   <ul className="text-white/90 text-lg mb-6 space-y-2 list-disc list-inside marker:text-white/70">
                     <li>Tablica kredowa</li>
@@ -472,31 +493,52 @@ export default function HomePage() {
                     <li>Kolorowanie materiałami plastycznymi</li>
                   </ul>
                   <div className="bg-white/20 backdrop-blur-md p-4 rounded-2xl border border-white/30 inline-block font-semibold text-base leading-snug">
-                    Bonus: Wybierz dowolną tematykę kolorowanki, a dostosujemy grafikę pod wydarzenie.
+                    Wybierz dowolną tematykę kolorowanki, a dostosujemy grafikę pod wydarzenie.
                   </div>
                 </div>
                 <div className="hidden lg:block w-48 h-48 bg-white/10 rounded-full flex items-center justify-center blur-sm transform scale-150" />
                 <div className="relative z-10 w-64 h-64 rounded-3xl overflow-hidden shadow-2xl rotate-6">
-                  <img src="https://picsum.photos/seed/toddler/400/400" alt="Dla najmłodszych" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src="/images/attractions/toddler-corner.jpg" alt="Dla najmłodszych" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Atrakcje Podstawowe */}
+        <section className="py-24 px-6 bg-white/50">
+          <div className="max-w-7xl mx-auto">
+            <div className="mb-12 text-center">
+              <h2 className="text-4xl md:text-5xl font-display text-gray-900 mb-4" style={{opacity:0,transform:"translateY(20px)"}}>Atrakcje Podstawowe</h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto" style={{opacity:0,transform:"translateY(20px)"}}>Zestaw bazowych aktywności, które budują rytm wydarzenia i angażują dzieci od początku do końca.</p>
+              <div className="h-1.5 w-24 vibrant-gradient rounded-full mt-6 mx-auto"></div>
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {BASIC_ATTRACTIONS.map((item, i) => (
+                <div key={i} className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-start gap-3">
+                  <div className="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center mt-0.5">
+                    <CheckCircle2 size={14} strokeWidth={3} />
+                  </div>
+                  <p className="text-gray-800 font-medium">{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
       </section>
 
       {/* Pricing Section */}
       <section id="pricing" className="py-24 bg-gray-50/50">
         <div className="max-w-7xl mx-auto px-6">
           <SectionTitle 
-            title="Cennik i Pakiety" 
+            title="Cenniki i Pakiety" 
             subtitle="Możliwość pełnej personalizacji pod każde wydarzenie."
           />
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
-              { name: "Pakiet Podstawowy", price: "X", icon: Users, color: "from-blue-400 to-blue-600", features: ["1 Animatorka", "Wszystkie podstawowe atrakcje", "Gwarancja uśmiechu"] },
-              { name: "Pakiet Rozszerzony", price: "X", icon: Sparkles, color: "from-purple-500 to-pink-500", features: ["2 Animatorki", "Większa liczba atrakcji", "Mały pokaz baniek XXL", "Brokatowe tatuaże"], recommended: true },
-              { name: "Pakiet Premium", price: "X", icon: PartyPopper, color: "from-orange-400 to-red-500", features: ["Pełna obsługa imprezy", "Dmuchaniec / Fotobudka", "Wata cukrowa & Popcorn", "Nagrody dla dzieci"] },
+              { name: "Pakiet Podstawowy", price: "500", icon: Users, color: "from-blue-400 to-blue-600", features: ["1 Animator", "Usługi animacyjne 2h", "Wszystkie atrakcje podstawowe + skręcanie balonów"] },
+              { name: "Pakiet Rozszerzony", price: "700", icon: Sparkles, color: "from-purple-500 to-pink-500", features: ["1 Animator", "Usługi animacyjne 3h", "Dmuchana zjeżdżalnia", "Wszystkie atrakcje podstawowe + malowanie twarzy + brokatowe tatuaże"], recommended: true },
+              { name: "Pakiet Premium", price: "1000", icon: PartyPopper, color: "from-orange-400 to-red-500", features: ["2 Animatorów", "Usługi animacyjne 4h", "Dmuchana zjeżdżalnia", "Skręcanie balonów", "Malowanie twarzy", "Brokatowe tatuaże", "Maskotka", "Wata cukrowa", "Popcorn"] },
             ].map((tier, i) => (
               <div key={i} className={cn(
                 "relative bg-white p-10 rounded-[2.5rem] shadow-lg border border-gray-100 flex flex-col",
@@ -534,9 +576,45 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          <p className="text-center mt-12 text-gray-500 max-w-2xl mx-auto leading-relaxed">
-            Cennik i koszty pakietów ustalamy indywidualnie (oznaczenia X zastąpimy konkretną wyceną po kontakcie). W wycenie uwzględniamy m.in. czas trwania, liczbę dzieci oraz dojazd — informacja o kosztach dojazdu poza uzgodnionym zakresem również w ramach wyceny. Napisz lub zadzwoń!
-          </p>
+           <p className="text-center mt-12 text-gray-500 max-w-2xl mx-auto leading-relaxed">
+             Ceny mogą się różnić w zależności od ilości dzieci, rodzaju wydarzenia, ilości atrakcji dodatkowych i lokalizacji.
+           </p>
+           <div className="mt-14 bg-white rounded-[2.5rem] p-8 md:p-10 border border-gray-100 shadow-sm max-w-5xl mx-auto">
+             <h3 className="text-2xl font-display text-gray-900 mb-6">Cennik atrakcji poza pakietami</h3>
+             <ul className="space-y-3 text-gray-700">
+                <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Dmuchana zjeżdżalnia - 600zł za cały dzień</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Piniata + cukierki - 100 zl</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Trampolina - 100 zl za cały dzień</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Maskotka - 150 zl</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Wata cukrowa - 200 zl za pierwszą godzinę + 100 zl każda dodatkowa godzina</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Popcorn - 200 zl za pierwszą godzinę + 100 zl każda dodatkowa godzina</span></li>
+               <li className="flex items-start gap-3"><span className="mt-1 h-2 w-2 rounded-full bg-brand-purple shrink-0"></span><span>Fotobudka - 700 zl za 2h + 200 zl każda dodatkowa godzina</span></li>
+             </ul>
+           </div>
+           <div className="mt-10 bg-brand-purple/5 rounded-[2.5rem] p-8 md:p-10 border border-brand-purple/10 max-w-5xl mx-auto">
+             <h3 className="text-2xl font-display text-gray-900 mb-4">Bonusy:</h3>
+             <ul className="space-y-2 text-gray-700 list-disc list-inside mb-4">
+                <li>Kącik dla maluchów</li>
+                <li>Kącik plastyczny</li>
+                <li>Koło fortuny z nagrodami</li>
+                <li>Skrzynia skarbów a w niej:</li>
+             </ul>
+             <ol className="space-y-1 text-gray-700 list-decimal list-inside">
+               <li>Medale</li>
+               <li>Naklejki</li>
+               <li>Mini fidget spinnery</li>
+               <li>Breloczek pop-it</li>
+               <li>Rurki sensoryczne</li>
+               <li>Cukierki w ozdobnym opakowaniu</li>
+               <li>Kolorowanki</li>
+               <li>Zakładki do książki z wybranym motywem</li>
+               <li>Mini sprężynki</li>
+               <li>Piłeczki kauczukowe</li>
+               <li>Mini bańki mydlane</li>
+               <li>Personalizowane dyplomy</li>
+               <li>I wiele innych...</li>
+             </ol>
+           </div>
         </div>
       </section>
 
@@ -547,28 +625,28 @@ export default function HomePage() {
             <SectionTitle 
               centered={false}
               title="Gdzie działamy?" 
-              subtitle="Działamy mobilnie — dojeżdżamy do klientów i tworzymy odlotową atmosferę, wszędzie tam, gdzie trwa zabawa. Baza: Biała Podlaska; realizujemy zlecenia lokalne i nie tylko."
+              subtitle="Nasza siedziba znajduje się w Białej Podlaskiej natomiast działamy mobilnie. Dojeżdżamy do klientów i tworzymy odlotową atmosferę, wszędzie tam, gdzie trwa zabawa. Realizujemy zlecenia lokalne i nie tylko."
             />
-            <div className="space-y-6">
-              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start space-x-4">
-                <div className="p-4 bg-green-100 text-green-600 rounded-2xl">
-                  <MapPin size={28} />
+              <div className="space-y-6">
+                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start space-x-4">
+                  <div className="p-4 bg-green-100 text-green-600 rounded-2xl">
+                    <MapPin size={28} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-xl text-gray-900">Dojazd do klienta</h4>
+                    <p className="text-gray-600">Tworzymy odlotową atmosferę dokładnie tam, gdzie odbywa się Twoje wydarzenie.</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="font-bold text-xl text-gray-900">Biała Podlaska + 30 km</h4>
-                  <p className="text-gray-600">Dojazd w promieniu 30 km od Białej Podlaskiej jest wliczony w cenę.</p>
+                <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start space-x-4">
+                  <div className="p-4 bg-blue-100 text-blue-600 rounded-2xl">
+                    <Users size={28} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-xl text-gray-900">Mobilność</h4>
+                    <p className="text-gray-600">Realizacja zleceń lokalnych i nie tylko. Możliwy dojazd do klienta — szczegóły i ewentualne dopłaty za dojazd poza uzgodniony zasięg ustalamy indywidualnie; zadzwoń lub napisz.</p>
+                  </div>
                 </div>
               </div>
-              <div className="bg-white p-6 rounded-3xl border border-gray-100 shadow-sm flex items-start space-x-4">
-                <div className="p-4 bg-blue-100 text-blue-600 rounded-2xl">
-                  <Users size={28} />
-                </div>
-                <div>
-                  <h4 className="font-bold text-xl text-gray-900">Mobilność</h4>
-                  <p className="text-gray-600">Realizacja zleceń lokalnych i nie tylko. Możliwy dojazd do klienta — szczegóły i ewentualne dopłaty za dojazd poza uzgodniony zasięg ustalamy indywidualnie; zadzwoń lub napisz.</p>
-                </div>
-              </div>
-            </div>
           </div>
           <div className="h-[450px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
             <iframe 
@@ -579,7 +657,7 @@ export default function HomePage() {
               allowFullScreen={true} 
               loading="lazy" 
               referrerPolicy="no-referrer-when-downgrade"
-              title="Mapa Biała Podlaska"
+              title="Mapa dojazdu"
             ></iframe>
           </div>
         </div>
@@ -588,7 +666,10 @@ export default function HomePage() {
       {/* FAQ Section */}
       <section className="py-24 bg-white/40">
         <div className="max-w-4xl mx-auto px-6">
-          <SectionTitle title="Najczęściej zadawane pytania" subtitle="FAQ — odpowiedzi na pytania, które najczęściej padają przed rezerwacją." />
+          <div className="mb-12 text-center">
+            <h2 className="text-4xl md:text-5xl font-display text-gray-900 mb-4">Najczęściej zadawane pytania</h2>
+            <div className="h-1.5 w-24 vibrant-gradient rounded-full mx-auto" />
+          </div>
           <div className="space-y-4">
             {FAQ.map((item, i) => (
               <details key={i} className="group bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all">
@@ -605,19 +686,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Gallery Section Placeholder */}
+      {/* Gallery Section */}
       <section className="py-24 max-w-7xl mx-auto px-6">
         <SectionTitle title="Galeria zdjęć" subtitle="Zobacz, jak bawią się z nami dzieci i rodziny — tu wkrótce więcej realizacji." />
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {[...Array(6)].map((_, i) => (
+          {[
+            "/images/gallery/party-1.jpg",
+            "/images/gallery/party-2.jpg",
+            "/images/gallery/party-3.jpg",
+            "/images/gallery/party-4.jpg",
+            "/images/gallery/party-5.jpg",
+            "/images/gallery/party-6.jpg",
+          ].map((src, i) => (
             <motion.div 
               key={i} 
               whileHover={{ scale: 1.02 }}
               className="rounded-3xl overflow-hidden shadow-lg"
             >
               <img 
-                src={`https://picsum.photos/seed/dance${i}/400/${i % 2 === 0 ? 500 : 300}`} 
-                alt="Galeria" 
+                src={src} 
+                alt={`Galeria ${i + 1}`}
                 className="w-full h-auto object-cover"
                 referrerPolicy="no-referrer"
               />
@@ -690,49 +778,55 @@ export default function HomePage() {
                 <div className="grid md:grid-cols-2 gap-6 md:gap-8">
                   <div className="flex flex-col gap-3">
                     <label className="text-sm font-semibold text-gray-400">Imię i Nazwisko</label>
-                    <input type="text" placeholder="Twoje imię" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600" />
+                    <input type="text" required placeholder="Twoje imię" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600" />
                   </div>
                   <div className="flex flex-col gap-3">
                     <label className="text-sm font-semibold text-gray-400">Numer telefonu</label>
-                    <input type="tel" placeholder="Nr telefonu" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600" />
+                    <input type="tel" required placeholder="Nr telefonu" className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600" />
                   </div>
                 </div>
                 <div className="flex flex-col gap-3">
-                  <label className="text-sm font-semibold text-gray-400">Typ wydarzenia</label>
-                  <select className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all text-gray-400 appearance-none">
-                    <option>Wybierz okazję...</option>
-                    {SERVICES.map((s, i) => <option key={i} className="bg-gray-900">{s}</option>)}
-                  </select>
+                  <label className="text-sm font-semibold text-gray-400">Wiadomość</label>
+                  <textarea rows={4} required placeholder="Napisz kilka słów..." className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600"></textarea>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <label htmlFor="event-date" className="text-sm font-semibold text-gray-400 flex items-center gap-2">
-                    <CalendarDays size={16} className="opacity-80 shrink-0" aria-hidden />
-                    Planowana data wydarzenia
+                <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <label className="flex items-start gap-3 text-sm text-gray-400 cursor-pointer">
+                    <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-500 text-brand-purple focus:ring-brand-purple cursor-pointer bg-transparent" />
+                    <span>Akceptuję <a className="underline hover:text-brand-purple" href="/regulamin">Regulamin</a> i <a className="underline hover:text-brand-purple" href="/polityka-prywatnosci">Politykę prywatności</a>.</span>
                   </label>
-                  <EventDateField id="event-date" name="eventDate" />
+                  <label className="flex items-start gap-3 text-sm text-gray-400 cursor-pointer">
+                    <input type="checkbox" required className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-500 text-brand-purple focus:ring-brand-purple cursor-pointer bg-transparent" />
+                    <span>Zgoda na przetwarzanie danych w celu obsługi zapytania (RODO).</span>
+                  </label>
+                  <label className="flex items-start gap-3 text-sm text-gray-400 cursor-pointer">
+                    <input type="checkbox" className="mt-0.5 h-4 w-4 shrink-0 rounded border-gray-500 text-brand-purple focus:ring-brand-purple cursor-pointer bg-transparent" />
+                    <span>Opcjonalnie: zgoda na kontakt w sprawie przyszłych ofert.</span>
+                  </label>
                 </div>
-                <div className="flex flex-col gap-3">
-                  <label className="text-sm font-semibold text-gray-400">Moja wiadomość</label>
-                  <textarea rows={4} placeholder="Napisz kilka słów o Twoich planach..." className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:ring-2 focus:ring-brand-purple outline-none transition-all placeholder:text-gray-600"></textarea>
-                </div>
-                <button type="submit" className="w-full vibrant-gradient py-5 rounded-2xl font-bold text-xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all">
-                  Wyślij zapytanie
+                <button type="submit" className="w-full vibrant-gradient py-4 rounded-2xl font-bold text-lg shadow-xl hover:scale-[1.02] active:scale-95 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed">
+                  Wyślij wiadomość
                 </button>
+                <p className="text-xs text-gray-500 leading-relaxed text-center">Administratorem danych jest Odlotowe Animacje (NIP: 5372696236).</p>
               </form>
             </div>
           </div>
 
           <div className="border-t border-white/10 pt-12 flex flex-col md:flex-row items-center justify-between text-gray-500 text-sm gap-6">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 vibrant-gradient rounded-full flex items-center justify-center text-white">
-                <PartyPopper size={16} />
-              </div>
+              <Image
+                src="/odlotoweanimacjelogo.jpeg"
+                alt="Logotyp Odlotowe Animacje"
+                width={64}
+                height={58}
+                className="h-8 w-auto rounded-md object-contain"
+                priority={false}
+              />
               <span className="font-bold text-white">Odlotowe Animacje</span>
             </div>
-            <p>© 2026 Odlotowe Animacje. Wszelkie prawa zastrzeżone.</p>
+            <p>© 2026 Odlotowe Animacje. Wszelkie prawa zastrzeżone. NIP: 5372696236</p>
             <div className="flex space-x-8">
-              <a href="#" className="hover:text-white transition-colors">Regulamin</a>
-              <a href="#" className="hover:text-white transition-colors">Prywatność</a>
+              <a className="hover:text-white transition-colors" href="/regulamin">Regulamin</a>
+              <a className="hover:text-white transition-colors" href="/polityka-prywatnosci">Prywatność</a>
             </div>
           </div>
         </div>
